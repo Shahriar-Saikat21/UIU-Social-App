@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import {ReactQueryDevtools} from 'react-query/devtools'
 
 import SignupPage from './Pages/SignupPage';
 import LoginPage from './Pages/LoginPage';
@@ -11,23 +13,28 @@ import AdminHomePage from './Pages/AdminHomePage';
 import AdminReportPage from './Pages/AdminReportPage';
 import AdminPostPage from './Pages/AdminPostPage';
 import NotFoundPage from './Pages/NotFoundPage';
+import Layout from './Components/Layout'
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/forgetPassword" element={<ForgetPassPage />} />
-      <Route path="/resetPassword" element={<ResetPassPage />} />
-      <Route path="/gettingStart" element={<ProfileInfoSetPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/messages" element={<ChatPage />} />
-      <Route path="/home" element={<AdminHomePage />} />
-      <Route path="/post" element={<AdminPostPage />} />
-      <Route path="/report" element={<AdminReportPage />} />
-      <Route path="/*" element={<NotFoundPage />} />
-
-    </Routes>
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route path="/" element={<Layout><LoginPage /></Layout>} />
+        <Route path="/signup" element={<Layout><SignupPage /></Layout>} />
+        <Route path="/forgetPassword" element={<Layout><ForgetPassPage /></Layout>} />
+        <Route path="/resetPassword" element={<Layout><ResetPassPage /></Layout>} />
+        <Route path="/gettingStart" element={<Layout><ProfileInfoSetPage /></Layout>} />
+        <Route path="/profile" element={<Layout><ProfilePage /></Layout>} />
+        <Route path="/messages" element={<Layout><ChatPage /></Layout>} />
+        <Route path="/home" element={<Layout><AdminHomePage /></Layout>} />
+        <Route path="/post" element={<Layout><AdminPostPage /></Layout>} />
+        <Route path="/report" element={<Layout><AdminReportPage /></Layout>} />
+        <Route path="/*" element={<Layout><NotFoundPage /></Layout>} />
+      </Routes>
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
+    </QueryClientProvider>
   );
 };
 
