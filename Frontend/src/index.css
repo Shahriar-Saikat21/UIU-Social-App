@@ -18,6 +18,12 @@
       hover:border-2 hover:border-[#FD7E14] md:w-1/2 w-full transition duration-300 ease-in font-primary;
 }
 
+.btnThree {
+  @apply text-[15px] text-white border-2 border-[#FD7E14] font-bold bg-[#FD7E14] my-5 py-2 
+      block px-4 rounded-md hover:bg-white hover:text-[#FD7E14]  
+      hover:border-2 hover:border-[#FD7E14] w-auto transition duration-300 ease-in font-primary;
+}
+
 .btnTwo {
   @apply text-lg text-[#FD7E14] border-2 border-[#FD7E14] font-bold bg-white my-5 py-2
       block px-2 rounded-md hover:bg-[#FD7E14] hover:text-[#ffffff] text-center  
