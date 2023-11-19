@@ -26,9 +26,6 @@ const AdminNavBar = () => {
           <NavLink to={"/post"} className=" pcNav">
             Post
           </NavLink>
-          <NavLink to={"/report"} className=" pcNav">
-            Report
-          </NavLink>
           <NavLink to={"/"} className=" pcNav">
             Logout
           </NavLink>

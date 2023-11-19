@@ -10,7 +10,6 @@ import ProfileInfoSetPage from './Pages/ProfileInfoSetPage';
 import ProfilePage from './Pages/ProfilePage';
 import ChatPage from './Pages/ChatPage';
 import AdminHomePage from './Pages/AdminHomePage';
-import AdminReportPage from './Pages/AdminReportPage';
 import AdminPostPage from './Pages/AdminPostPage';
 import NotFoundPage from './Pages/NotFoundPage';
 import Layout from './Components/Layout'
@@ -30,7 +29,6 @@ const App = () => {
         <Route path="/messages" element={<Layout><ChatPage /></Layout>} />
         <Route path="/home" element={<Layout><AdminHomePage /></Layout>} />
         <Route path="/post" element={<Layout><AdminPostPage /></Layout>} />
-        <Route path="/report" element={<Layout><AdminReportPage /></Layout>} />
         <Route path="/*" element={<Layout><NotFoundPage /></Layout>} />
       </Routes>
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
