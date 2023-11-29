@@ -1,9 +1,10 @@
-import React from 'react';
+import image from "../assets/pagenotfound.png";
+
 
 const NotFoundPage = () => {
     return (
-        <div>
-            Not Found
+        <div className="flex w-full h-[100vh] justify-center items-center">
+            <img src={image} alt="Page not found....." />
         </div>
     );
 };
