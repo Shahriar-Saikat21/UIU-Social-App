@@ -52,7 +52,7 @@ const SignupOTP = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <h2 className="text-sm inline-block font-primary text-[#192655] mb-2">
-        Check your provided email for OTP
+      Check your UIU provided email for OTP
       </h2>
       <input
         type="text"
