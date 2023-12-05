@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'learning-app',
+  database: 'social-app',
 });
 
 export default connection;

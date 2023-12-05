@@ -17,8 +17,8 @@ export const signupValidation = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.userPassword, 10);
 
   try {
-    const query = `INSERT INTO users(user_id,user_name,user_email,u_pic,user_password,user_role,u_status) VALUES ('',?,?,'default.png',?,?,'Unblock')`;
-    connection.query(query, [req.body.userName,req.body.userEmail,hashedPassword,req.body.accountType], function (err, rows) {
+    const query = `INSERT INTO users(user_id,user_sid,user_name,user_designation,user_email,u_pic,user_password,user_role,user_status) VALUES ('',?,?,?,?,'Default.svg.png',?,'profile','Unblock')`;
+    connection.query(query, [req.body.userSID,req.body.userName,req.body.accountType,req.body.userEmail,hashedPassword], function (err, rows) {
       if (err) throw err;
       res.json({ success: true, message: "Signup Successfully" });
     });

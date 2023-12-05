@@ -10,6 +10,7 @@ export const login = (req, res) => {
       if (err) throw err;
       if (rows.length > 0) {
         const isValidPass =  bcrypt.compareSync(req.query.password, rows[0].user_password);
+        console.log(isValidPass)
         if (isValidPass) {
           const userObject = {
             id: rows[0].user_id,

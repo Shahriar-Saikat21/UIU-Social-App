@@ -1,7 +1,7 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 const logindata = async(data) => {
   try {
     const response = await axios.get(`http://localhost:3000/login?email=${data.email}&password=${data.password}`,{
@@ -22,11 +22,9 @@ const Login = () => {
     if(result.success){
       sessionStorage.setItem('status', result.role);
       if(result.role === 'admin'){
-        navigate('/admin-home');
-      }else if(result.role === 'student'){
-        navigate('/student-home');
-      }else{
-        navigate('/instructor-home');
+        navigate('/home');
+      }else if(result.role === 'profile'){
+        navigate('/profile');
       }
     }else{
       alert(result.message);
@@ -41,9 +39,9 @@ const Login = () => {
         <h1 className="text-4xl text-[#FD7E14] pt-4 pr-5 font-primary mb-5">
           Login
         </h1>
-        <form className="flex flex-col justify-center items-center ">
+        <form className="flex flex-col justify-center items-center" noValidate onSubmit={handleSubmit(useLogin)}>
           <input
-            type="text"
+            type="email"
             placeholder="Enter Your User Id"
             className="formInput mb-5"
             {...register("email", {
@@ -58,7 +56,7 @@ const Login = () => {
               }
             })}
           />
-          <p className=" mb-2 text-[#FD7E14] font-semibold"></p>
+          <p className=" mb-2 text-[#FD7E14] font-semibold">{errors.email?.message}</p>
           <input
             type="password"
             placeholder="Enter Your Password"
@@ -70,7 +68,7 @@ const Login = () => {
               },
             })}
           />
-          <p className=" mb-2 text-[#FD7E14] font-semibold"></p>
+          <p className=" mb-2 text-[#FD7E14] font-semibold">{errors.password?.message}</p>
           <button className="btn">Login</button>
         </form>
         

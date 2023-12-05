@@ -1,5 +1,3 @@
-
-
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -20,8 +18,8 @@ const ResetPAss = () => {
   const navigate = useNavigate();
 
   const useReset = async (data) => {
-    if(sessionStorage.getItem('resetAuth') === 'ok'){
-      const email = sessionStorage.getItem('resetEmail');
+    if(localStorage.getItem('resetAuth') === 'ok'){
+      const email = localStorage.getItem('resetEmail');
       const resetdata = {
         email: email,
         password: data.password
@@ -29,15 +27,15 @@ const ResetPAss = () => {
       const result =  await resetPassword(resetdata);
       if(result.success){
         alert(result.message);
-        navigate('/login');
+        navigate('/');
       } else{
         alert(result.message);
       }
     } else{
       alert("You are not authorized to reset password");
     }
-    sessionStorage.removeItem('resetAuth');
-    sessionStorage.removeItem('resetEmail');
+    localStorage.removeItem('resetAuth');
+    localStorage.removeItem('resetEmail');
     reset();
   };
     return (
@@ -46,7 +44,7 @@ const ResetPAss = () => {
             <h1 className="text-4xl text-[#FD7E14] pt-4 pr-5 font-primary mb-5">
               Reset Password
             </h1>
-            <form className="flex flex-col justify-center items-center ">
+            <form className="flex flex-col justify-center items-center " onSubmit={handleSubmit(useReset)} noValidate>
               <input
                 type="password"
                 placeholder="Enter your new password"
@@ -62,7 +60,9 @@ const ResetPAss = () => {
                   },
                 })}
               />
-              <p className=" mb-2 text-[#FD7E14] font-semibold"></p>
+              <p className=" mb-2 text-red-500 font-semibold">
+            {errors.password?.message}
+          </p>
               <input
                 type="password"
                 placeholder="Confirm password"
@@ -75,7 +75,9 @@ const ResetPAss = () => {
                   }                
                 })}
               />
-              <p className=" mb-2 text-[#FD7E14] font-semibold"></p>
+              <p className=" mb-2 text-red-500 font-semibold">
+            {errors.confirmPassword?.message}
+          </p>
               <button className="btn">Set New Password</button>
             </form>        
           </div>

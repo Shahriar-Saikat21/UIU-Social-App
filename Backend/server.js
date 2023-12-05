@@ -5,6 +5,7 @@ import cors from 'cors';
 
 //internal imports  
 import {pageNotFound,defaultErrorHandle} from './Middleware/defaultErrorHandle.js';
+import userRoute from './Routes/userRoute.js';
 
 //App Initialized
 const app = express();
@@ -19,6 +20,8 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
 }));
+
+app.use(userRoute)
 
 // Default Error Handle
 app.use(pageNotFound);

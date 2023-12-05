@@ -18,6 +18,7 @@ const SignupOTP = () => {
   const otpbyUser = sessionStorage.getItem('otp');
   const data ={
     userName:sessionStorage.getItem('userName'),
+    userSID:sessionStorage.getItem('userSID'),
     userEmail:sessionStorage.getItem('userEmail'),
     accountType:sessionStorage.getItem('accountType'),
     userPassword:sessionStorage.getItem('userPassword'),
@@ -30,14 +31,16 @@ const SignupOTP = () => {
           sessionStorage.removeItem('otp');
           sessionStorage.removeItem('userName');
           sessionStorage.removeItem('userEmail');
+          sessionStorage.removeItem('userSID');
           sessionStorage.removeItem('accountType');
           sessionStorage.removeItem('userPassword');
           alert(result.message);
-          navigate("/login");
+          navigate("/");
         }else{
           sessionStorage.removeItem('otp');
           sessionStorage.removeItem('userName');
           sessionStorage.removeItem('userEmail');
+          sessionStorage.removeItem('userSID');
           sessionStorage.removeItem('accountType');
           sessionStorage.removeItem('userPassword');
           alert(result.message);

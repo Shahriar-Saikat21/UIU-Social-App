@@ -1,7 +1,7 @@
 import express from 'express';
 
 import {signupOtp,signupValidation} from '../Controller/signupController.js';
-import {login,logout} from '../Controller/loginController.js'
+import {login,logout} from '../Controller/loginoutController.js'
 import {forgotPassword,resetPassword} from '../Controller/passwordController.js';
 
 

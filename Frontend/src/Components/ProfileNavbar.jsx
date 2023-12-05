@@ -1,13 +1,21 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { HiOutlineBars4, HiOutlineXMark } from "react-icons/hi2";
+import axios from 'axios';
+
+const logout = async ()=>{
+  await axios.get('http://localhost:3000/logout',{
+    withCredentials:true
+  });
+  sessionStorage.removeItem('status');
+}
 
 const ProfileNavbar = () => {
   const [toggle, setToggle] = useState(false);
   const toggleHandler = () => {
     setToggle(!toggle);
   };
-
+  const navigate = useNavigate();
   return (
     <nav className="bg-primary fixed w-full h-[60px] z-20">
       <div className=" md:max-w-[1480px] max-w-[600px] m-auto w-full h-full flex justify-between items-center md:px-12 px-4">
@@ -26,7 +34,10 @@ const ProfileNavbar = () => {
           <NavLink to={"/messages"} className=" pcNav">
             Messsage
           </NavLink>
-          <NavLink to={"/"} className=" pcNav">
+          <NavLink to={"/"} className=" pcNav" onClick={async ()=>{
+              await logout(); 
+              navigate('/');              
+            }}>
             Logout
           </NavLink>
         </ul>
@@ -51,7 +62,10 @@ const ProfileNavbar = () => {
             <NavLink to={"/messages"} className=" mobileNav">
               Message
             </NavLink>
-            <NavLink to={"/"} className=" mobileNav">
+            <NavLink to={"/"} className=" mobileNav" onClick={async ()=>{
+              await logout(); 
+              navigate('/');              
+            }}>
               Logout
             </NavLink>
           </ul>

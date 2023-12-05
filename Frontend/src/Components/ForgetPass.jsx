@@ -1,5 +1,3 @@
-
-
 import axios from "axios";
 import {useForm} from 'react-hook-form'
 
@@ -20,8 +18,8 @@ const ForgetPass = () => {
   const onSubmit = async (data) => {
     const result = await submitEmail(data);
     if(result.success){
-      sessionStorage.setItem("resetAuth", 'ok');
-      sessionStorage.setItem("resetEmail", data.email);
+      localStorage.setItem("resetAuth", 'ok');
+      localStorage.setItem("resetEmail", data.email);
       alert(result.message);
     }else{
       alert(result.message);
@@ -34,7 +32,7 @@ const ForgetPass = () => {
             <h1 className="text-4xl text-[#FD7E14] pt-4 pr-5 font-primary mb-5">
               Forget Password
             </h1>
-            <form className="flex flex-col justify-center items-center ">
+            <form className="flex flex-col justify-center items-center " onSubmit={handleSubmit(onSubmit)} noValidate>
               <input
                 type="email"
                 placeholder="Enter your UIU provided email"
@@ -42,16 +40,18 @@ const ForgetPass = () => {
                 {...register("email", {
                   pattern: {
                     value:
-                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    message: "Invalid email address",
+                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[uiu.ac.bd]+)*$/,
+                    message: "UIU provided email is required",
                   },
                   required: {
                     value: true,
-                    message: "User Email is required",
-                  }
+                    message: "UIU provided email is required",
+                  },
                 })}
               />
-              <p className=" mb-2 text-[#FD7E14] font-semibold"></p>
+              <p className=" mb-2 text-red-500 font-semibold">
+            {errors.email?.message}
+          </p>
               <button className="btn">Send Reset Link</button>
             </form>        
           </div>
