@@ -6,6 +6,7 @@ import cors from 'cors';
 //internal imports  
 import {pageNotFound,defaultErrorHandle} from './Middleware/defaultErrorHandle.js';
 import userRoute from './Routes/userRoute.js';
+import profileRoute from './Routes/profileRoute.js';
 
 //App Initialized
 const app = express();
@@ -14,6 +15,7 @@ const dotenvConfig = dotenv.config();
 // Default Middlewares
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(express.static("Public"));
 
 // CORS settings
 app.use(cors({
@@ -21,7 +23,8 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(userRoute)
+app.use(userRoute);
+app.use(profileRoute);
 
 // Default Error Handle
 app.use(pageNotFound);

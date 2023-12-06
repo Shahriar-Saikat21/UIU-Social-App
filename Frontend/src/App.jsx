@@ -6,7 +6,6 @@ import SignupPage from './Pages/SignupPage';
 import LoginPage from './Pages/LoginPage';
 import ForgetPassPage from './Pages/ForgetPassPage';
 import ResetPassPage from './Pages/ResetPassPage';
-import ProfileInfoSetPage from './Pages/ProfileInfoSetPage';
 import ProfilePage from './Pages/ProfilePage';
 import ChatPage from './Pages/ChatPage';
 import AdminHomePage from './Pages/AdminHomePage';
@@ -24,7 +23,6 @@ const App = () => {
         <Route path="/signup" element={<Layout><SignupPage /></Layout>} />
         <Route path="/forgetPassword" element={<Layout><ForgetPassPage /></Layout>} />
         <Route path="/resetPassword" element={<Layout><ResetPassPage /></Layout>} />
-        <Route path="/gettingStart" element={<Layout><ProfileInfoSetPage /></Layout>} />
         <Route path="/profile" element={<Layout><ProfilePage /></Layout>} />
         <Route path="/messages" element={<Layout><ChatPage /></Layout>} />
         <Route path="/home" element={<Layout><AdminHomePage /></Layout>} />

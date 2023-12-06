@@ -1,5 +1,6 @@
 import { useState } from "react";
-import StoryCard from "./StoryCard";
+import StoryCatMe from "./StoryCatMe";
+import StoryCatShow from "./StoryCatShow";
 
 const ShowStoryBtn = () => {
   const [toggleA, setToggleA] = useState(true);
@@ -13,6 +14,8 @@ const ShowStoryBtn = () => {
     setToggleA(false);
     setToggleB(true);
   };
+
+
   return (
     <div className="flex flex-col w-full h-auto justify-center items-start">
     <div className="flex w-full justify-start gap-3 mt-2 mb-5">
@@ -37,8 +40,7 @@ const ShowStoryBtn = () => {
         My Stories
       </button>
     </div>
-    <StoryCard />
-    <StoryCard />
+    {(toggleA)? <StoryCatShow/>:<StoryCatMe/>}
     </div>
   );
 };
