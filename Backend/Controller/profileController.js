@@ -17,6 +17,22 @@ export const showProfileInfo = (req,res)=>{
     }
 }
 
+export const searchPeople = (req,res)=>{
+    try{
+        const query = 'SELECT * FROM users WHERE user_sid = ? OR user_name=?';
+        connection.query(query,[req.query.name,req.query.name],(err,result)=>{
+            if(err){
+                res.json({message:err,success:false});
+            }
+            else{
+                res.json({info:result,success:true});
+            }
+        });
+    }catch(err){
+        res.json({message:err,success:false});
+    }
+}
+
 export const changeProfilePic = (req,res) =>{
     try{
         const query = `UPDATE users SET u_pic = ? WHERE user_id = ?`;

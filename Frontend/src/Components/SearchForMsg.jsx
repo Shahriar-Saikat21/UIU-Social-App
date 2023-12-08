@@ -1,8 +1,58 @@
-import Pic from "../assets/DemoPic2.jpg";
+import SearchResultBox from "./SearchResultBox";
+import {useForm } from "react-hook-form";
+import { useState } from "react";
+import axios from "axios";
+
+const searchPeople = async (data) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/searchPeople?name=${data.search}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to search or network problems");
+  }
+};
 
 const SearchForMsg = ({ isVisible, onClose }) => {
   const handle = (e) => {
     if (e.target.id === "wrapper") onClose();
+  };
+
+  const [showSearchPeople, setShowSearchPeople] = useState(false);
+  const [searchResultName, setSearchResultName] = useState("");
+  const [searchResultID, setSearchResultID] = useState("");
+  const [searchResultPic, setSearchResultPic] = useState("");
+  const [searchResult, setSearchResult] = useState(false);
+  const [searchUserID, setSearchUserID] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const useSearch = async (data) => {
+    const result = await searchPeople(data);
+    if (result.success) {
+      setShowSearchPeople(true);
+      if(result.info.length>0){
+        setSearchResultName(result.info[0].user_name);
+        setSearchResultID(result.info[0].user_sid);
+        setSearchResultPic(result.info[0].u_pic);
+        setSearchUserID(result.info[0].user_id);
+        setSearchResult(true);
+      }else{
+        setSearchResult(false);
+      }
+    } else {
+      alert(result.message);
+    }
+    reset();
   };
 
   if (!isVisible) return null;
@@ -17,12 +67,21 @@ const SearchForMsg = ({ isVisible, onClose }) => {
         <h1 className="text-xl text-[#FD7E14] font-semibold font-primary text-center mb-4">
           Search People
         </h1>
-        <form className="w-full">
+        <form className="w-full" noValidate onSubmit={handleSubmit(useSearch)}>
           <input
             type="text"
             placeholder="Enter User Name or ID..."
             className="border-2 border-[#FD7E14] rounded-md p-2 w-full focus:outline-none mb-3"
+            {...register("search", {
+              required: {
+                value: true,
+                message: "Enter User Name or ID to search",
+              },
+            })}
           />
+          <p className=" mb-2 text-[#FD7E14] font-semibold">
+            {errors.search?.message}
+          </p>
           <div className="flex justify-center items-center gap-2">
             <button type="submit" className="btn inline-block">
               Search
@@ -33,31 +92,15 @@ const SearchForMsg = ({ isVisible, onClose }) => {
           </div>
         </form>
         <div className=" flex w-full h-auto flex-col">
-          <h2 className="text-2xl font-semibold font-primary text-[#FD7E14] mb-5">
-            Search Result.....
-          </h2>
-          <div className="flex justify-between items-center w-full h-auto md:border-b-2 md:bg-slate-100 rounded-xl p-2 cursor-pointer">
-            <div className="flex justify-start items-center">
-              <div className="w-[50px] h-[50px] md:w-[50px] rounded-full ring ring-[#FD7E14] mr-2">
-                <img
-                  src={Pic}
-                  alt="pic"
-                  className="h-full w-full object-cover rounded-full"
-                />
-              </div>
-              <div className="flex flex-col ">
-                <h2 className="text-[#FD7E14] font-primary font-semibold text-lg ">
-                  Barsha Saha
-                </h2>
-                <h2 className="text-[#FD7E14] font-primary text-md ">
-                  ID : 011211000
-                </h2>
-              </div>
-            </div>
-            <button className="bg-[#FD7E14] text-white font-primary  text-md px-5 py-2 rounded-xl">
-              Send Message
-            </button>
-          </div>
+          {showSearchPeople ? (
+            <SearchResultBox
+              searchName={searchResultName}
+              searchID={searchResultID}
+              searchPic={searchResultPic}
+              searchResult={searchResult}
+              searchUserID = {searchUserID}
+            />
+          ) : null}
         </div>
       </div>
     </div>

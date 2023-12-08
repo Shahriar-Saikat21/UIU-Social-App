@@ -7,7 +7,8 @@ import {showProfileInfo,
   addPostWithPic,
   showAllStory,
   showMyStory,
-  deletePost} from '../Controller/profileController.js';
+  deletePost,
+  searchPeople} from '../Controller/profileController.js';
 import { authentication } from '../Middleware/authentication.js';
 
 const profileRouter = express.Router();
@@ -20,6 +21,7 @@ profileRouter.post("/addPostWithPic", authentication,upload.single("image"),addP
 profileRouter.get("/showMyStory",authentication,showMyStory);
 profileRouter.get("/showAllStory",authentication,showAllStory);
 profileRouter.get("/deletePost/:id",authentication,deletePost);
+profileRouter.get("/searchPeople",authentication,searchPeople);
 
 
 export default profileRouter;

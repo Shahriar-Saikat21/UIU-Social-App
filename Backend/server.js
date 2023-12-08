@@ -7,6 +7,7 @@ import cors from 'cors';
 import {pageNotFound,defaultErrorHandle} from './Middleware/defaultErrorHandle.js';
 import userRoute from './Routes/userRoute.js';
 import profileRoute from './Routes/profileRoute.js';
+import chatRoute from './Routes/chatRoute.js';
 
 //App Initialized
 const app = express();
@@ -25,6 +26,7 @@ app.use(cors({
 
 app.use(userRoute);
 app.use(profileRoute);
+app.use(chatRoute);
 
 // Default Error Handle
 app.use(pageNotFound);

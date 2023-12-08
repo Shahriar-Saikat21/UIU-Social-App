@@ -1,4 +1,3 @@
-import React from "react";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import { Link,useNavigate } from "react-router-dom";
@@ -21,6 +20,7 @@ const Login = () => {
     const result = await logindata(data);
     if(result.success){
       sessionStorage.setItem('status', result.role);
+      sessionStorage.setItem('id', result.id);
       if(result.role === 'admin'){
         navigate('/home');
       }else if(result.role === 'profile'){

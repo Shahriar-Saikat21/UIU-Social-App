@@ -33,6 +33,7 @@ export const login = (req, res) => {
               message: "User Logged In Successfully",
               success: true,
               role: rows[0].user_role,
+              id : rows[0].user_id
             });
         } else {
           res.json({ message: "Invalid email or password", success: false });
